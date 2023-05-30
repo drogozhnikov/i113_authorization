@@ -11,6 +11,16 @@ spring:
           lowerCaseServiceId: true
       globalcors:
         add-to-simple-url-handler-mapping: true
+        cors-configurations:
+          '[/**]':
+            allowedOrigins: "http://localhost:8082"
+            allowedHeaders: "*"
+            allowedMethods:
+              - GET
+              - POST
+              - PUT
+              - DELETE
+
       routes:
         - id: eureka-server
           uri: http://localhost:8761
@@ -42,20 +52,20 @@ spring:
             - Path=/api/i113/**
           filters:
   #            - AuthenticationFilter
-  security:
-    oauth2:
-      client:
-        registration:
-          keycloak-spring-gateway-client:
-            provider: keycloak-provider
-            client-id: api-gateway
-            client-secret: x55yAjg31mnrW8Gq9iHEjdnNqV68nnCI
-            authorization-grant-type: authorization_code
-            redirect-uri: "http://localhost:8082/"
-            scope: openid #message.read
-        provider:
-          keycloak-provider:
-            issuer-uri: http://localhost:8081/realms/i113_realm
+#  security:
+#    oauth2:
+#      client:
+#        registration:
+#          keycloak-spring-gateway-client:
+#            provider: keycloak-provider
+#            client-id: api-gateway
+#            client-secret: x55yAjg31mnrW8Gq9iHEjdnNqV68nnCI
+#            authorization-grant-type: authorization_code
+#            redirect-uri: "http://localhost:8082/"
+#            scope: openid #message.read
+#        provider:
+#          keycloak-provider:
+#            issuer-uri: http://localhost:8081/realms/i113_realm
 
 #Enable these to debug the Authorization flow
 logging:
